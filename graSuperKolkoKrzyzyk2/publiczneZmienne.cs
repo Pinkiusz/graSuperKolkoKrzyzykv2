@@ -12,7 +12,7 @@ namespace graSuperKolkoKrzyzyk2
         //Tworzy zmienną która zapisuje czy gra dalej trwa
         public static bool value = false;
 
-        //Użyj jeśli chcesz zmienić wartość na odwrotną tej zmiennej ^^^
+        //Użyj jeśli chcesz zmienić wartość ^^^
         public static void changeState(bool newValue)
         {
             value = newValue;
@@ -26,9 +26,9 @@ namespace graSuperKolkoKrzyzyk2
         public static int value = 1;
 
         //Użyj tej funkcji jak chcesz ustawić inną wartość zmiennej ilości graczy
-        public static void setValue(int newvalue)
+        public static void setValue(short newValue)
         {
-            value = newvalue;
+            value = newValue;
         }
     }
 
@@ -41,10 +41,10 @@ namespace graSuperKolkoKrzyzyk2
         public static bool wybrane = false;
 
         //Tworzenie zmiennej która zapisuje poprzednie pole
-        public static int value;
+        public static short value;
 
         //Użyj jeśli chcesz zmienić wartość poprzedniego pola
-        public static void set(int newvalue)
+        public static void set(short newvalue)
         {
             value = newvalue;
             wybrane = true;

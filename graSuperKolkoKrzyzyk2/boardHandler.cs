@@ -14,7 +14,7 @@ namespace graSuperKolkoKrzyzyk2
         public static char[][] mainBoard = makeCleanBoard();
 
         // Zmienia wartość w jednym z pól planszy na znak gracza
-        public static void changeBoardValue(int malaMapka, int poleMapki, char znakGracza)
+        public static void changeBoardValue(short malaMapka, short poleMapki, char znakGracza)
         {
             mainBoard[malaMapka][poleMapki] = znakGracza;
         }
@@ -53,10 +53,10 @@ namespace graSuperKolkoKrzyzyk2
         internal static char[][] makeCleanBoard()
         {
             char[][] mainBoard = new char[9][];
-            for (int i = 0; i < 9; i++)
+            for (short i = 0; i < 9; i++)
             {
                 mainBoard[i] = new char[9];
-                for (int j = 0; j < 9; j++)
+                for (short j = 0; j < 9; j++)
                 {
                     mainBoard[i][j] = '-';
                 }
@@ -65,7 +65,7 @@ namespace graSuperKolkoKrzyzyk2
         }
 
         // Sprawdza, czy pole jest puste (zawiera '-')
-        internal static bool checkIfFree(int malaMapa, int pole)
+        internal static bool checkIfFree(short malaMapa, short pole)
         {
             return mainBoard[malaMapa][pole] == '-';
         }
@@ -87,9 +87,9 @@ namespace graSuperKolkoKrzyzyk2
                         Console.WriteLine("Wczytana wartość nie może być pusta");
                         continue;
                     }
-                    else if (inputFunctions.checkIfInt(input))
+                    else if (inputFunctions.checkIfShort(input))
                     {
-                        int newInput = Convert.ToInt32(input) - 1;
+                        short newInput = (short)(Convert.ToInt16(input) - 1);
                         if (newInput >= 0 && newInput <= 8 && checkIfFree(poprzedniePole.value, newInput))
                         {
                             changeBoardValue(poprzedniePole.value, newInput, 'X');
@@ -117,11 +117,12 @@ namespace graSuperKolkoKrzyzyk2
                         Console.WriteLine("Wczytana wartość nie może być pusta");
                         continue;
                     }
-                    else if (inputFunctions.checkIfIntArray(input))
+                    else if (inputFunctions.checkIfShortArray(input))
                     {
-                        int[] newInput = Array.ConvertAll((Convert.ToString(input).Split('.')), int.Parse);
-                        int malaMapka = newInput[0] - 1;
-                        int pole = newInput[1] - 1;
+                        short[] newInput = Array.ConvertAll((Convert.ToString(input).Split('.')), short.Parse);
+
+                        short malaMapka = (short)(newInput[0] - 1);
+                        short pole = (short)(newInput[1] - 1);
                         if (malaMapka >= 0 && malaMapka <= 8 && pole >= 0 && pole <= 8 && checkIfFree(malaMapka, pole))
                         {
                             changeBoardValue(malaMapka, pole, 'X');
@@ -153,9 +154,11 @@ namespace graSuperKolkoKrzyzyk2
                     Console.WriteLine("Wczytana wartość nie może być pusta");
                     continue;
                 }
-                else if (inputFunctions.checkIfInt(input))
+                else if (inputFunctions.checkIfShort(input))
                 {
-                    int newInput = Convert.ToInt32(input) - 1;
+
+                   
+                    short newInput = (short)(Convert.ToInt16(input) - 1);
                     if (newInput >= 0 && newInput <= 8 && checkIfFree(poprzedniePole.value, newInput))
                     {
                         changeBoardValue(poprzedniePole.value, newInput, 'O');

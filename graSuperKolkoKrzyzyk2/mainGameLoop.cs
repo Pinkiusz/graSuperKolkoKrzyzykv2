@@ -21,9 +21,9 @@ namespace graSuperKolkoKrzyzyk2
                 if (input != null)
                 {
 
-                    if (inputFunctions.checkIfInt(input))
+                    if (inputFunctions.checkIfShort(input))
                     {
-                        int newInput = Convert.ToInt32(input);
+                        short newInput = (short)Convert.ToInt16(input);
 
                         if (newInput >= 1 && newInput <= 3)
                         {
@@ -79,9 +79,9 @@ namespace graSuperKolkoKrzyzyk2
                 object input = Console.ReadLine();
                 if (input != null)
                 {
-                    if (inputFunctions.checkIfInt(input))
+                    if (inputFunctions.checkIfShort(input))
                     {
-                        int newInput = Convert.ToInt32(input);
+                        short newInput = (short)Convert.ToInt16(input);
 
                         if (newInput == 1)
                         {
