@@ -19,6 +19,22 @@ namespace graSuperKolkoKrzyzyk2
             mainBoard[malaMapka][poleMapki] = znakGracza;
         }
 
+        public static void mapWon(short mapa, char znak)
+        {
+            if (znak == 'X')
+            {
+                mainBoard[mapa][0] = 'X'; mainBoard[mapa][1] = ' '; mainBoard[mapa][2] = 'X';
+                mainBoard[mapa][3] = ' '; mainBoard[mapa][4] = 'X'; mainBoard[mapa][5] = ' ';
+                mainBoard[mapa][6] = 'X'; mainBoard[mapa][7] = ' '; mainBoard[mapa][8] = 'X';
+            }
+            else
+            {
+                mainBoard[mapa][0] = 'O'; mainBoard[mapa][1] = 'O'; mainBoard[mapa][2] = 'O';
+                mainBoard[mapa][3] = 'O'; mainBoard[mapa][4] = ' '; mainBoard[mapa][5] = 'O';
+                mainBoard[mapa][6] = 'O'; mainBoard[mapa][7] = 'O'; mainBoard[mapa][8] = 'O';
+            }
+        }
+
         // Wyświetla aktualny stan całej planszy w konsoli
         public static void showMainBoard()
         {
@@ -77,8 +93,9 @@ namespace graSuperKolkoKrzyzyk2
             bool pierwszyRuchWykonany = false;
             while (!pierwszyRuchWykonany)
             {
+                
                 // Sprawdza, czy pierwszy ruch już wykonano; jeśli tak, pozwala wybrać pole w poprzednio wybranej "małej mapce"
-                if (poprzedniePole.wybrane)
+                if (poprzedniePole.wybrane && finishedBoards.winnerOfSmallBoard[poprzedniePole.value] != 'X' && finishedBoards.winnerOfSmallBoard[poprzedniePole.value] != 'O')
                 {
                     Console.WriteLine($"Wybierz pole do postawienia znaku w mapce: {poprzedniePole.value + 1}");
                     object? input = Console.ReadLine();
@@ -94,6 +111,8 @@ namespace graSuperKolkoKrzyzyk2
                         {
                             changeBoardValue(poprzedniePole.value, newInput, 'X');
                             Console.WriteLine($"Postawiłeś znak (X) w polu nr.{newInput + 1}");
+                            statusConditions.checkSmallMap();
+                            statusConditions.checkMainStatus();
                             poprzedniePole.set(newInput);
                             pierwszyRuchWykonany = true;
                         }
@@ -110,7 +129,7 @@ namespace graSuperKolkoKrzyzyk2
                 // Pierwszy ruch gry: wybór pola na mapie (format [mapa].[pole])
                 else
                 {
-                    Console.WriteLine("Pierwszy ruch, wybierz mapę i pole ([mapa].[pole])");
+                    Console.WriteLine("Wybierz mapę i pole ([mapa].[pole])");
                     object? input = Console.ReadLine();
                     if (input == null)
                     {
@@ -127,6 +146,8 @@ namespace graSuperKolkoKrzyzyk2
                         {
                             changeBoardValue(malaMapka, pole, 'X');
                             Console.WriteLine($"Postawiłeś znak (X) w polu nr.{pole + 1} w mapce {malaMapka + 1}");
+                            statusConditions.checkSmallMap();
+                            statusConditions.checkMainStatus();
                             poprzedniePole.set(pole);
                             pierwszyRuchWykonany = true;
                         }
@@ -142,38 +163,78 @@ namespace graSuperKolkoKrzyzyk2
                 }
             }
 
+            
             // Wykonanie drugiego ruchu w grze dla kolejnego gracza
             bool drugiRuchWykonany = false;
             showMainBoard();
             while (!drugiRuchWykonany)
             {
-                Console.WriteLine($"Wpisz pole do postawienia znaku w mapie: {poprzedniePole.value + 1}");
-                object? input = Console.ReadLine();
-                if (input == null)
+                if (poprzedniePole.wybrane && finishedBoards.winnerOfSmallBoard[poprzedniePole.value] != 'X' && finishedBoards.winnerOfSmallBoard[poprzedniePole.value] != 'O')
                 {
-                    Console.WriteLine("Wczytana wartość nie może być pusta");
-                    continue;
-                }
-                else if (inputFunctions.checkIfShort(input))
-                {
-
-                   
-                    short newInput = (short)(Convert.ToInt16(input) - 1);
-                    if (newInput >= 0 && newInput <= 8 && checkIfFree(poprzedniePole.value, newInput))
+                    Console.WriteLine($"Wpisz pole do postawienia znaku w mapie: {poprzedniePole.value + 1}");
+                    object? input = Console.ReadLine();
+                    if (input == null)
                     {
-                        changeBoardValue(poprzedniePole.value, newInput, 'O');
-                        Console.WriteLine($"Postawiłeś znak (O) w polu nr.{newInput + 1}");
-                        poprzedniePole.set(newInput);
-                        drugiRuchWykonany = true;
+                        Console.WriteLine("Wczytana wartość nie może być pusta");
+                        continue;
+                    }
+                    else if (inputFunctions.checkIfShort(input))
+                    {
+
+
+                        short newInput = (short)(Convert.ToInt16(input) - 1);
+                        if (newInput >= 0 && newInput <= 8 && checkIfFree(poprzedniePole.value, newInput))
+                        {
+                            changeBoardValue(poprzedniePole.value, newInput, 'O');
+                            Console.WriteLine($"Postawiłeś znak (O) w polu nr.{newInput + 1}");
+                            statusConditions.checkSmallMap();
+                            statusConditions.checkMainStatus();
+                            poprzedniePole.set(newInput);
+                            drugiRuchWykonany = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Nie można użyć wybranego pola");
+                        }
                     }
                     else
                     {
-                        Console.WriteLine("Nie można użyć wybranego pola");
+                        Console.WriteLine("Nieprawidłowa wartość, wprowadź liczbę od 1 do 9");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Nieprawidłowa wartość, wprowadź liczbę od 1 do 9");
+                    Console.WriteLine("Wybierz mapę i pole ([mapa].[pole])");
+                    object? input = Console.ReadLine();
+                    if (input == null)
+                    {
+                        Console.WriteLine("Wczytana wartość nie może być pusta");
+                        continue;
+                    }
+                    else if (inputFunctions.checkIfShortArray(input))
+                    {
+                        short[] newInput = Array.ConvertAll((Convert.ToString(input).Split('.')), short.Parse);
+
+                        short malaMapka = (short)(newInput[0] - 1);
+                        short pole = (short)(newInput[1] - 1);
+                        if (malaMapka >= 0 && malaMapka <= 8 && pole >= 0 && pole <= 8 && checkIfFree(malaMapka, pole))
+                        {
+                            changeBoardValue(malaMapka, pole, 'O');
+                            Console.WriteLine($"Postawiłeś znak (O) w polu nr.{pole + 1} w mapce {malaMapka + 1}");
+                            statusConditions.checkSmallMap();
+                            statusConditions.checkMainStatus();
+                            poprzedniePole.set(pole);
+                            pierwszyRuchWykonany = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Nieprawidłowe wartości");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Wartość powinna być w formacie [mapa].[pole]");
+                    }
                 }
             }
         }

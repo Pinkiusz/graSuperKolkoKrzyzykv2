@@ -16,7 +16,7 @@ namespace graSuperKolkoKrzyzyk2
                 Console.Title = "Super Kółko i Krzyżyk - Gra";
                 Console.Write("Super Kółko i Krzyżyk:\n 1.Start\n 2.Jak grać?\n 3.Wyjdź\nGra Stworzona przez Antoni Kwiatkowski oraz Marcel Wenderholm\nPomysł na grę: „Vsauce - How To Play Super Tic-Tac-Toe (Youtube)”\n");
 
-                object input = Console.ReadLine();
+                object input = Console.ReadLine(); 
 
                 if (input != null)
                 {
