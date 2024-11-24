@@ -1,26 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace graSuperKolkoKrzyzyk2
 {
     public class mainGameLoop
     {
+
         public static void Main()
         {
+            // Wyświetl w megabajtach w Exit, jeśli gra zakończy się
             bool poczatek = true;
             while (poczatek)
             {
                 Console.Title = "Super Kółko i Krzyżyk - Gra";
-                Console.Write("Super Kółko i Krzyżyk:\n 1.Start\n 2.Jak grać?\n 3.Wyjdź\nGra Stworzona przez Antoni Kwiatkowski oraz Marcel Wenderholm\nPomysł na grę: „Vsauce - How To Play Super Tic-Tac-Toe (Youtube)”\n");
+                Console.Write("Super Kółko i Krzyżyk:\n 1.Start.\n 2.Jak grać?\n 3.Wyjdź.\nGra Stworzona przez Antoni Kwiatkowski oraz Marcel Wenderholm.\nPomysł na grę: „Vsauce - How To Play Super Tic-Tac-Toe (Youtube)”.\nAby kontynuoować należy wpisać 1, 2 lub 3.\n");
 
-                object input = Console.ReadLine(); 
+                object input = Console.ReadLine();
 
                 if (input != null)
                 {
-
                     if (inputFunctions.checkIfShort(input))
                     {
                         short newInput = (short)Convert.ToInt16(input);
@@ -54,28 +52,27 @@ namespace graSuperKolkoKrzyzyk2
                 {
                     Console.WriteLine("Wczytana wartość nie może być pusta");
                 }
-            } 
+            }
         }
-        public static void startGame()
+
+        private static void startGame()
         {
             graTrwa.changeState(true);
             while (graTrwa.value)
             {
                 boardHandler.showMainBoard();
-
                 boardHandler.newTurn();
             }
-
             Main();
         }
 
-        public static void howToPlay()
+        private static void howToPlay()
         {
             bool finishedReading = false;
             while (!finishedReading)
             {
-                Console.WriteLine("Jak Grać: \n Super Kółko i Krzyżyk to ulepszona wersja znanej gry „kółko i krzyżyk”.\n Gra rozpoczyna się od narysowania planszy, jak w klasycznym kółku i krzyżyku, jednak w każdym polu, \n w którym normalnie umieszczany byłby znak, rysowana jest kolejna plansza do tej gry. \n Pierwszy gracz ma możliwość wyboru dowolnego z 81 pól, aby położyć swój znak. \n Każdy kolejny gracz musi stawiać swój znak w małej planszy odpowiadającej polu, \n w którym umieścił znak poprzedni gracz. \n Na przykład, jeśli pierwszy gracz położy znak w środkowej planszy w prawym górnym rogu, \n następny gracz będzie musiał zagrać w prawej górnej małej planszy. \n Gdy jedna z małych gier zostanie wygrana (tj. gdy gracz ułoży 3 swoje znaki w rządku), \n całej grze przypisywany jest znak zwycięzcy tej małej gry. \n Jeśli gracz zostanie zmuszony do zagrania w zakończonej już grze, może wybrać dowolne pole. \n Gra kończy się, gdy któryś z graczy ułoży w rządku 3 wygrane małe gry.");            
-                Console.WriteLine("Aby kontynuuować wpisz 1.");                     
+                Console.WriteLine("Jak Grać: \n Super Kółko i Krzyżyk to ulepszona wersja znanej gry „kółko i krzyżyk”.\n Gra rozpoczyna się od narysowania planszy, jak w klasycznym kółku i krzyżyku, jednak w każdym polu, \n w którym normalnie umieszczany byłby znak, rysowana jest kolejna plansza do tej gry. \n Pierwszy gracz ma możliwość wyboru dowolnego z 81 pól, aby położyć swój znak. \n Każdy kolejny gracz musi stawiać swój znak w małej planszy odpowiadającej polu, \n w którym umieścił znak poprzedni gracz. \n Na przykład, jeśli pierwszy gracz położy znak w środkowej planszy w prawym górnym rogu, \n następny gracz będzie musiał zagrać w prawej górnej małej planszy. \n Gdy jedna z małych gier zostanie wygrana (tj. gdy gracz ułoży 3 swoje znaki w rządku), \n całej grze przypisywany jest znak zwycięzcy tej małej gry. \n Jeśli gracz zostanie zmuszony do zagrania w zakończonej już grze, może wybrać dowolne pole. \n Gra kończy się, gdy któryś z graczy ułoży w rządku 3 wygrane małe gry.");
+                Console.WriteLine("Aby kontynuuować wpisz 1.");
                 object input = Console.ReadLine();
                 if (input != null)
                 {
@@ -89,7 +86,7 @@ namespace graSuperKolkoKrzyzyk2
                         }
                         else
                         {
-                            Console.WriteLine("Wcztytana wartość jest poza zasięgiem");
+                            Console.WriteLine("Wczytana wartość jest poza zasięgiem");
                         }
                     }
                     else
@@ -103,13 +100,11 @@ namespace graSuperKolkoKrzyzyk2
                 }
             }
             Main();
-            
         }
 
-        public static void Exit()
-        {
+        private static void Exit()
+        { 
             Environment.Exit(0);
         }
-
     }
 }

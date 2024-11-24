@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace graSuperKolkoKrzyzyk2
+﻿namespace graSuperKolkoKrzyzyk2
 {
     public class inputFunctions
     {
@@ -20,7 +14,8 @@ namespace graSuperKolkoKrzyzyk2
                 return false;
             }
 
-            if (!(short.TryParse(inputString[0], out short num))){
+            if (!(short.TryParse(inputString[0], out short num)))
+            {
                 return false;
             }
 
