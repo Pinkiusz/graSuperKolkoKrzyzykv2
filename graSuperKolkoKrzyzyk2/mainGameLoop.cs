@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 
 namespace graSuperKolkoKrzyzyk2
 {
@@ -8,7 +7,6 @@ namespace graSuperKolkoKrzyzyk2
 
         public static void Main()
         {
-            // Wyświetl w megabajtach w Exit, jeśli gra zakończy się
             bool poczatek = true;
             while (poczatek)
             {
@@ -103,7 +101,7 @@ namespace graSuperKolkoKrzyzyk2
         }
 
         private static void Exit()
-        { 
+        {
             Environment.Exit(0);
         }
     }

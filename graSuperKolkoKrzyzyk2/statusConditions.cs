@@ -73,7 +73,7 @@
 
         public static void checkDraw()
         {
-            for (short i = 0; i<9; i++)
+            for (short i = 0; i < 9; i++)
             {
                 if (finishedBoards.iloscRuchow[i] == 9 && finishedBoards.winnerOfSmallBoard[i] == '-')
                 {

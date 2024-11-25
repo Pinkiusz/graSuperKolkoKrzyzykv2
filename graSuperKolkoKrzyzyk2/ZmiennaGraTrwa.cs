@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace graSuperKolkoKrzyzyk2
 {
-        public class graTrwa
-        {
+    public class graTrwa
+    {
         //Tworzy zmienną która zapisuje czy gra dalej trwa
         public static bool value = false;
 

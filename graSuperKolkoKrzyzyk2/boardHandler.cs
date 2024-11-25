@@ -14,7 +14,7 @@
 
         public static void mapDraw(short mapa)
         {
-            for (int i = 0; i<9; i++)
+            for (int i = 0; i < 9; i++)
             {
                 mainBoard[mapa][i] = '-';
             }

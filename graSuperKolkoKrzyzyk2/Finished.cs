@@ -1,55 +1,61 @@
-﻿public class finishedBoards
+﻿using System;
+using System.Collections.Generic;
+
+namespace graSuperKolkoKrzyzyk2
 {
-    public static int[] iloscRuchow = createIloscRuchow();
-
-    public static bool valueBoardMain = false;
-    public static char winnerOfBoardMain;
-
-    public static char[] winnerOfSmallBoard = makeCleanWinnerBoardValues();
-    public static bool[] valueSmallBoard = makeCleanBoardValues();
-
-
-    private static int[] createIloscRuchow()
+    public class finishedBoards
     {
-        int[] temp = new int[9];
-        for (int i = 0; i < 9; i++)
-        {
-            temp[i] = 0;
-        }
-        return temp;
-    }
+        public static int[] iloscRuchow = createIloscRuchow();
 
-    internal static char[] makeCleanWinnerBoardValues()
-    {
-        char[] tymczasowa = new char[9];
-        for (short i = 0; i < 9; i++)
-        {
-            tymczasowa[i] = '-';
-        }
-        return tymczasowa;
-    }
+        public static bool valueBoardMain = false;
+        public static char winnerOfBoardMain;
 
-    internal static bool[] makeCleanBoardValues()
-    {
-        bool[] tymczasowa = new bool[9];
-        for (short i = 0; i < 9; i++)
+        public static char[] winnerOfSmallBoard = makeCleanWinnerBoardValues();
+        public static bool[] valueSmallBoard = makeCleanBoardValues();
+
+
+        private static int[] createIloscRuchow()
         {
-            tymczasowa[i] = false;
+            int[] temp = new int[9];
+            for (int i = 0; i < 9; i++)
+            {
+                temp[i] = 0;
+            }
+            return temp;
         }
 
-        return tymczasowa;
-    }
+        internal static char[] makeCleanWinnerBoardValues()
+        {
+            char[] tymczasowa = new char[9];
+            for (short i = 0; i < 9; i++)
+            {
+                tymczasowa[i] = '-';
+            }
+            return tymczasowa;
+        }
 
-    public static void setSmallBoard(short mapa, char znak)
-    {
-        winnerOfSmallBoard[mapa] = znak;
-        valueSmallBoard[mapa] = true;
-    }
+        internal static bool[] makeCleanBoardValues()
+        {
+            bool[] tymczasowa = new bool[9];
+            for (short i = 0; i < 9; i++)
+            {
+                tymczasowa[i] = false;
+            }
 
-    public static void changeBigBoardValue(char znak)
-    {
-        winnerOfBoardMain = znak;
-        valueBoardMain = true;
-    }
+            return tymczasowa;
+        }
 
+        public static void setSmallBoard(short mapa, char znak)
+        {
+            winnerOfSmallBoard[mapa] = znak;
+            valueSmallBoard[mapa] = true;
+        }
+
+        public static void changeBigBoardValue(char znak)
+        {
+            winnerOfBoardMain = znak;
+            valueBoardMain = true;
+        }
+
+    }
 }
